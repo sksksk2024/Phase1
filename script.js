@@ -2,7 +2,7 @@ const choices = ['rock', 'paper', 'scissors'];
 let score = 0;
 
 const model = document.getElementById('model');
-const body = document.getElementById('main');
+const overlay = document.getElementById('model-overlay');
 
 function playGame(userChoice) {
   const computerChoice = choices[Math.floor(Math.random() * 3)];
@@ -53,10 +53,12 @@ function playGame(userChoice) {
 
 const openModel = () => {
   model.classList.remove('hidden');
-  body.classList.add('grayscale');
+  overlay.classList.remove('hidden');
 };
 
 const closeModel = () => {
   model.classList.add('hidden');
-  body.classList.remove('grayscale');
+  overlay.classList.add('hidden');
 };
+
+overlay.addEventListener('click', closeModel);
