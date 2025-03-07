@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- if you didn't pick anything, remains this menu -->
+    <header class="header">
+      <div class="header__roles">
+        <div>Rock</div>
+        <div>Paper</div>
+        <div>Scissors</div>
+      </div>
+      <div class="header__score">
+        <span>Score</span>
+        <p class="header__score__num" id="score">12</p>
+      </div>
+    </header>
+
+    <main id="main">
+      <section id="section1" class="section1">
+        <img
+          class="main__path"
+          src="./images/bg-triangle.svg"
+          aria-hidden="true"
+          alt=""
+        />
+        <button
+          id="paper"
+          class="main__choice paper"
+          onclick="playGame('paper')"
+        >
+          <img
+            class="main__choice--paper"
+            src="./images/icon-paper.svg"
+            alt="paper"
+          />
+        </button>
+        <button class="main__choice rock" onclick="playGame('rock')">
+          <img
+            class="main__choice--rock"
+            src="./images/icon-rock.svg"
+            alt="rock"
+          />
+        </button>
+        <button class="main__choice scissors" onclick="playGame('scissors')">
+          <img
+            class="main__choice--scissors"
+            src="./images/icon-scissors.svg"
+            alt="scissors"
+          />
+        </button>
+      </section>
+
+      <section id="section2" class="section2 hidden">
+        <div class="section2__sep">
+          <div class="section2__sep--me">
+            <div id="user-choice">You picked</div>
+            <button
+              class="main__choice unclickable"
+              onclick="playGame('scissors')"
+            >
+              <img
+                id="user-choice-img"
+                class="main__choice--scissors"
+                src="./images/icon-scissors.svg"
+                alt="scissors"
+              />
+            </button>
+          </div>
+
+          <div id="section2__sep--them" class="section2__sep--them">
+            <div id="computer-choice">The house picked</div>
+            <button
+              class="main__choice unclickable"
+              onclick="playGame('scissors')"
+            >
+              <img
+                id="computer-choice-img"
+                src="./images/icon-scissors.svg"
+                alt="scissors"
+              />
+            </button>
+          </div>
+        </div>
+
+        <div id="results">
+          <div id="game-result">-</div>
+          <button id="play-again">play again</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- else you pick, the house picked menu -->
+
+    <footer>
+      <section class="model hidden" id="model">
+        <div class="model__container">
+          <h2 class="">RULES</h2>
+          <img
+            onclick="closeModel()"
+            id="close"
+            src="./images/icon-close.svg"
+            alt="close"
+          />
+        </div>
+
+        <img src="./images/image-rules.svg" alt="rules" />
+      </section>
+      <button onclick="openModel()" class="footer__rules" id="rules">
+        Rules
+      </button>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
