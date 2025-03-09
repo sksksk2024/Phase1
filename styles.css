@@ -234,9 +234,9 @@ footer {
   padding: 1rem;
 }
 
-.footer__rules {
+.footer__rules,
+.footer__bonus {
   position: absolute;
-  right: 0;
   padding: 0.7rem 2rem;
   border: 1px solid white;
   border-radius: 0.5rem;
@@ -255,11 +255,20 @@ footer {
   }
 }
 
+.footer__rules {
+  right: 0;
+}
+
+.footer__bonus {
+  left: 0;
+}
+
+.footer__bonus:hover,
 .footer__rules:hover {
   box-shadow: 3px 10px 20px rgba(0, 0, 0, 0.4);
 }
 
-.footer__rules:active {
+.footer__bonus:hover .footer__rules:active {
   scale: 0.98;
   transform: translate3d(20px);
 }

@@ -28,29 +28,39 @@
           aria-hidden="true"
           alt=""
         />
-        <button
-          id="paper"
-          class="main__choice paper"
-          onclick="playGame('paper')"
-        >
+        <button id="paper" class="main__choice paper">
           <img
             class="main__choice--paper"
             src="./images/icon-paper.svg"
             alt="paper"
           />
         </button>
-        <button class="main__choice rock" onclick="playGame('rock')">
+        <button id="rock" class="main__choice rock">
           <img
             class="main__choice--rock"
             src="./images/icon-rock.svg"
             alt="rock"
           />
         </button>
-        <button class="main__choice scissors" onclick="playGame('scissors')">
+        <button id="scissors" class="main__choice scissors">
           <img
             class="main__choice--scissors"
             src="./images/icon-scissors.svg"
             alt="scissors"
+          />
+        </button>
+        <button id="lizard" class="main__choice lizard hidden">
+          <img
+            class="main__choice--lizard"
+            src="./images/icon-lizard.svg"
+            alt="lizard"
+          />
+        </button>
+        <button id="spock" class="main__choice spock hidden">
+          <img
+            class="main__choice--spock"
+            src="./images/icon-spock.svg"
+            alt="spock"
           />
         </button>
       </section>
@@ -59,13 +69,10 @@
         <div class="section2__sep">
           <div class="section2__sep--me">
             <div id="user-choice">You picked</div>
-            <button
-              class="main__choice unclickable"
-              onclick="playGame('scissors')"
-            >
+            <button class="main__choice unclickable">
               <img
                 id="user-choice-img"
-                class="main__choice--scissors"
+                class="main__choice"
                 src="./images/icon-scissors.svg"
                 alt="scissors"
               />
@@ -74,12 +81,10 @@
 
           <div id="section2__sep--them" class="section2__sep--them">
             <div id="computer-choice">The house picked</div>
-            <button
-              class="main__choice unclickable"
-              onclick="playGame('scissors')"
-            >
+            <button class="main__choice unclickable">
               <img
                 id="computer-choice-img"
+                class="main__choice"
                 src="./images/icon-scissors.svg"
                 alt="scissors"
               />
@@ -101,19 +106,13 @@
       <section class="model hidden" id="model">
         <div class="model__container">
           <h2 class="">RULES</h2>
-          <img
-            onclick="closeModel()"
-            id="close"
-            src="./images/icon-close.svg"
-            alt="close"
-          />
+          <img id="close" src="./images/icon-close.svg" alt="close" />
         </div>
 
         <img src="./images/image-rules.svg" alt="rules" />
       </section>
-      <button onclick="openModel()" class="footer__rules" id="rules">
-        Rules
-      </button>
+      <button class="footer__bonus" id="bonus">Bonus</button>
+      <button class="footer__rules" id="rules">Rules</button>
     </footer>
 
     <script src="script.js"></script>

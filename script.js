@@ -1,64 +1,128 @@
-const choices = ['rock', 'paper', 'scissors'];
-let score = 0;
+class RockPaperScissors {
+  constructor() {
+    this.choices = ['rock', 'paper', 'scissors'];
 
-const model = document.getElementById('model');
-const overlay = document.getElementById('model-overlay');
+    this.extendedChoices = ['rock', 'paper', 'scissors', 'lizard', 'spock']; // Bonus mode
+    this.isBonusMode = false; // Tracks whether bonus mode is active
 
-function playGame(userChoice) {
-  const computerChoice = choices[Math.floor(Math.random() * 3)];
-  let result = '';
-  const section1 = document.getElementById('section1');
-  const section2 = document.getElementById('section2');
-  const userChoiceImg = document.getElementById('user-choice-img');
-  const userChoiceBg = document.getElementById('user-choice-img');
-  const computerChoiceImg = document.getElementById('computer-choice-img');
-  const computerChoiceBg = document.getElementById('computer-choice-img');
+    this.score = 0;
+    this.model = document.getElementById('model');
+    this.overlay = document.getElementById('model-overlay');
+    this.section1 = document.getElementById('section1');
+    this.section2 = document.getElementById('section2');
+    this.userChoiceImg = document.getElementById('user-choice-img');
+    this.userChoiceBg = document.getElementById('user-choice-img');
+    this.computerChoiceImg = document.getElementById('computer-choice-img');
+    this.computerChoiceBg = document.getElementById('computer-choice-img');
+    this.scoreElement = document.getElementById('score');
+    this.gameResult = document.getElementById('game-result');
+    this.playAgainBtn = document.getElementById('play-again');
 
-  section1.classList.add('hidden');
-  section2.classList.remove('hidden');
-  computerChoiceBg.classList.remove(`main__choice--${computerChoice}`);
-  computerChoiceBg.classList = `main__choice--${computerChoice}`;
-  computerChoiceImg.src = `./images/icon-${computerChoice}.svg`;
-  computerChoiceImg.alt = computerChoice;
-
-  userChoiceBg.classList.remove(`main__choice--${userChoice}`);
-  userChoiceBg.classList = `main__choice--${userChoice}`;
-
-  userChoiceImg.src = `./images/icon-${userChoice}.svg`;
-  userChoiceImg.alt = userChoice;
-
-  if (userChoice === computerChoice) {
-    result = 'DRAW';
-  } else if (
-    (userChoice === 'rock' && computerChoice === 'scissors') ||
-    (userChoice === 'paper' && computerChoice === 'rock') ||
-    (userChoice === 'scissors' && computerChoice === 'paper')
-  ) {
-    result = 'YOU WIN';
-    score++;
-  } else {
-    result = 'YOU LOSE';
-    score--;
+    this.overlay.addEventListener('click', () => this.closeModel());
+    this.playAgainBtn.addEventListener('click', () => this.resetGame());
   }
 
-  document.getElementById('score').textContent = `${score}`;
+  playGame(userChoice) {
+    let options;
+    options = this.isBonusMode ? 5 : 3;
+    const computerChoice = this.choices[Math.floor(Math.random() * options)];
 
-  document.getElementById('game-result').textContent = `${result}`;
-  const again = document.getElementById('play-again');
-  again.addEventListener('click', () => {
-    section2.classList.add('hidden');
-    section1.classList.remove('hidden');
-  });
+    this.section1.classList.add('hidden');
+    this.section2.classList.remove('hidden');
+
+    // Update user choice display
+    this.userChoiceBg.className = `main__choice main__choice--${userChoice}`;
+    this.userChoiceImg.src = `./images/icon-${userChoice}.svg`;
+    this.userChoiceImg.alt = userChoice;
+
+    // Update computer choice display
+    this.computerChoiceBg.className = `main__choice main__choice--${computerChoice}`;
+    this.computerChoiceImg.src = `./images/icon-${computerChoice}.svg`;
+    this.computerChoiceImg.alt = computerChoice;
+
+    const result = this.determineWinner(userChoice, computerChoice);
+    this.updateScore(result);
+  }
+
+  toggleBonusMode() {
+    this.isBonusMode = !this.isBonusMode;
+
+    // Toggle choices between standard and bonus mode
+    this.choices = this.isBonusMode
+      ? this.extendedChoices
+      : ['rock', 'paper', 'scissors'];
+
+    // Toggle visibility of Lizard and Spock buttons
+    document.getElementById('lizard').classList.toggle('hidden');
+    document.getElementById('spock').classList.toggle('hidden');
+
+    // Update UI to reflect the mode
+    document.querySelector('.footer__bonus').textContent = this.isBonusMode
+      ? 'Standard Mode'
+      : 'Bonus Mode';
+  }
+
+  updateChoiceDisplay(element, choice) {
+    element.parentElement.className = `main__choice ${choice}`;
+    element.src = `./images/icon-${choice}.svg`;
+    element.alt = choice;
+  }
+
+  determineWinner(userChoice, computerChoice) {
+    if (userChoice === computerChoice) return 'DRAW';
+
+    const winConditions = {
+      rock: ['scissors', 'lizard'],
+      paper: ['rock', 'spock'],
+      scissors: ['paper', 'lizard'],
+      lizard: ['spock', 'paper'],
+      spock: ['scissors', 'rock'],
+    };
+
+    if (winConditions[userChoice].includes(computerChoice)) {
+      this.score++;
+      return 'YOU WIN';
+    } else {
+      this.score--;
+      return 'YOU LOSE';
+    }
+  }
+
+  updateScore(result) {
+    this.gameResult.textContent = result;
+    this.scoreElement.textContent = this.score;
+  }
+
+  resetGame() {
+    this.section2.classList.add('hidden');
+    this.section1.classList.remove('hidden');
+  }
+
+  openModel() {
+    this.model.classList.remove('hidden');
+    this.overlay.classList.remove('hidden');
+  }
+
+  closeModel() {
+    this.model.classList.add('hidden');
+    this.overlay.classList.add('hidden');
+  }
 }
 
-const openModel = () => {
-  model.classList.remove('hidden');
-  overlay.classList.remove('hidden');
-};
+const game = new RockPaperScissors();
 
-const closeModel = () => {
-  model.classList.add('hidden');
-  overlay.classList.add('hidden');
-};
+// Attach event listeners to buttons
+document.querySelectorAll('.main__choice').forEach((button) => {
+  button.addEventListener('click', (e) => game.playGame(e.currentTarget.id));
+});
 
-overlay.addEventListener('click', closeModel);
+document.querySelector('.footer__bonus').addEventListener('click', () => {
+  game.toggleBonusMode();
+});
+
+document
+  .getElementById('rules')
+  .addEventListener('click', () => game.openModel());
+document
+  .getElementById('close')
+  .addEventListener('click', () => game.closeModel());
