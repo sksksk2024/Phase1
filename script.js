@@ -56,6 +56,39 @@ class RockPaperScissors {
     document.getElementById('lizard').classList.toggle('hidden');
     document.getElementById('spock').classList.toggle('hidden');
 
+    // Change the background path image
+    const pathImage = document.getElementById('game-path');
+    pathImage.src = this.isBonusMode
+      ? './images/bg-pentagon.svg'
+      : './images/bg-triangle.svg';
+
+    // Switching the classic button to bonus button classes
+    const paperButton = document.getElementById('paper');
+    const scissorsButton = document.getElementById('scissors');
+    const rockButton = document.getElementById('rock');
+
+    if (this.isBonusMode) {
+      paperButton.classList.remove('paper');
+      paperButton.classList.add('paper-bonus');
+      scissorsButton.classList.remove('scissors');
+      scissorsButton.classList.add('scissors-bonus');
+      rockButton.classList.remove('rock');
+      rockButton.classList.add('rock-bonus');
+    } else {
+      paperButton.classList.add('paper');
+      paperButton.classList.remove('paper-bonus');
+      scissorsButton.classList.add('scissors');
+      scissorsButton.classList.remove('scissors-bonus');
+      rockButton.classList.add('rock');
+      rockButton.classList.remove('rock-bonus');
+    }
+
+    // Switching Rules between the game modes
+    const rulesImg = document.getElementById('rulesImg');
+    rulesImg.src = this.isBonusMode
+      ? './images/image-rules-bonus.svg'
+      : './images/image-rules.svg';
+
     // Update UI to reflect the mode
     document.querySelector('.footer__bonus').textContent = this.isBonusMode
       ? 'Standard Mode'
@@ -121,7 +154,7 @@ document.querySelector('.footer__bonus').addEventListener('click', () => {
 });
 
 document
-  .getElementById('rules')
+  .getElementById('rulesBtn')
   .addEventListener('click', () => game.openModel());
 document
   .getElementById('close')
