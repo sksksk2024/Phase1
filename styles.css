@@ -112,6 +112,19 @@ header {
   max-width: 100%;
 }
 
+.main__path--bonus {
+  position: absolute;
+  width: 30rem;
+
+  @media (max-width: 35rem) {
+    width: 16rem;
+  }
+}
+
+.main__path--bonus img {
+  max-width: 100%;
+}
+
 .main__choice {
   display: flex;
   flex-direction: row;
@@ -167,6 +180,21 @@ header {
   }
 }
 
+.lizard {
+  transform: translateY(10rem);
+
+  @media (max-width: 35rem) {
+    transform: translateY(7rem);
+  }
+}
+.lizard:active {
+  transform: translateY(10.3rem) scale(0.98);
+
+  @media (max-width: 35rem) {
+    transform: translateY(7.3rem);
+  }
+}
+
 .main__choice--rock:active {
   box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.5),
     /* Deep inner shadow for pressed effect */ inset -2px 0px 20px rgba(255, 255, 255, 0.3),
@@ -188,9 +216,25 @@ header {
     /* Pressed outer shadow */ 0px 3px 8px rgba(0, 0, 0, 0.5); /* Reduced soft glow */
 }
 
+.main__choice--spock:active {
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.5),
+    /* Deep inner shadow for pressed effect */ inset -2px 0px 20px rgba(255, 255, 255, 0.3),
+    /* Slight top highlight */ 0px 2px 0px cyan,
+    /* Pressed outer shadow */ 0px 3px 8px rgba(0, 0, 0, 0.5); /* Reduced soft glow */
+}
+
+.main__choice--lizard:active {
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.5),
+    /* Deep inner shadow for pressed effect */ inset -2px 0px 20px rgba(255, 255, 255, 0.3),
+    /* Slight top highlight */ 0px 2px 0px purple,
+    /* Pressed outer shadow */ 0px 3px 8px rgba(0, 0, 0, 0.5); /* Reduced soft glow */
+}
+
 .main__choice--rock,
 .main__choice--paper,
-.main__choice--scissors {
+.main__choice--scissors,
+.main__choice--lizard,
+.main__choice--spock {
   width: 10rem;
   height: 10rem;
   border-radius: 3rem;
@@ -224,6 +268,16 @@ header {
 .main__choice--scissors {
   border: 10px solid yellow;
   box-shadow: 0px 8px 0px rgb(185, 185, 0);
+}
+
+.main__choice--lizard {
+  border: 10px solid purple;
+  box-shadow: 0px 8px 0px darkmagenta;
+}
+
+.main__choice--spock {
+  border: 10px solid cyan;
+  box-shadow: 0px 8px 0px darkcyan;
 }
 
 footer {
